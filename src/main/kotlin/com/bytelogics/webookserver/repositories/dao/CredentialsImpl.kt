@@ -56,7 +56,7 @@ class CredentialsImpl (val db: ICredentials, val userImpl: UserImpl) {
     }
 
     /* REGISTER */
-    fun register(credentials: Credentials): Credentials {
+    fun register(credentials: Credentials): User {
         credentials.failedAttempts = 0;
         credentials.status = Credentials.LoginStatus.PENDING
         // update token
@@ -71,7 +71,7 @@ class CredentialsImpl (val db: ICredentials, val userImpl: UserImpl) {
         } else
             credentials.user = userImpl.updateBooker(credentials.user)
 
-        return db.save(credentials)
+        return db.save(credentials).user
     }
 
     /* CHANGE PASSWORD */

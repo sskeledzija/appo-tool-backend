@@ -18,7 +18,7 @@ class CredentialsController(val credentialsImpl: CredentialsImpl) {
 
     @CrossOrigin
     @PostMapping("/register")
-    fun register(@RequestBody registerRequest: Credentials): ResponseEntity<Credentials> {
+    fun register(@RequestBody registerRequest: Credentials): ResponseEntity<User> {
         logger.info("## Create registration: [$registerRequest]")
 
         return ResponseEntity.status(HttpStatus.CREATED).body(credentialsImpl.register(registerRequest))
