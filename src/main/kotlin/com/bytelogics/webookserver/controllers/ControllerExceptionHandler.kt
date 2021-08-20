@@ -2,6 +2,7 @@ package com.bytelogics.webookserver.controllers
 
 import com.bytelogics.webookserver.exceptions.*
 import org.slf4j.LoggerFactory
+import org.springframework.dao.IncorrectResultSizeDataAccessException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
@@ -59,6 +60,17 @@ class ControllerExceptionHandler {
         logger.error("Returning HTTP 400 Bad Request", e)
         val errorDetails = ErrorDetails(Date(),
             "Entity mismatch error",
+            e?.message!!
+        )
+        return ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST)
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handle(e: IncorrectResultSizeDataAccessException?): ResponseEntity<ErrorDetails> {
+        logger.error("Returning HTTP 400 Bad Request", e)
+        val errorDetails = ErrorDetails(Date(),
+            "User Already Exists",
             e?.message!!
         )
         return ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST)

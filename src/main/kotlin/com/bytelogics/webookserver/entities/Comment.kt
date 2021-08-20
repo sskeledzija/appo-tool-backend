@@ -9,4 +9,5 @@ import java.util.*
 @Document
 data class Comment(@Id val id: String = UUID.randomUUID().toString(),
                    val comment: String,
-                   val commentDate: Instant)
+                   val commentDate: Instant,
+                   val status: String)
