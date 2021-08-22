@@ -24,6 +24,7 @@ class CredentialsController(val credentialsImpl: CredentialsImpl) {
         return ResponseEntity.status(HttpStatus.CREATED).body(credentialsImpl.register(registerRequest))
     }
 
+    @CrossOrigin
     @PostMapping("/get")
     fun getBooker(@RequestBody request: GetRequest): ResponseEntity<Credentials> {
         logger.info("# Get credentials by email [$request]")
@@ -31,6 +32,7 @@ class CredentialsController(val credentialsImpl: CredentialsImpl) {
         return ResponseEntity.of(maybeCredentials)
     }
 
+    @CrossOrigin
     @PostMapping("/change-password")
     fun changePassword(@RequestBody request: ChangePasswordRequest): ResponseEntity<String> {
         logger.info("# Change password [$request]")
@@ -44,6 +46,7 @@ class CredentialsController(val credentialsImpl: CredentialsImpl) {
         return ResponseEntity.ok().body(credentialsImpl.login(request.email, password = request.password))
     }
 
+    @CrossOrigin()
     @PostMapping("/token")
     fun loginWithToken(@RequestBody request: LoginWithTokenRequest): ResponseEntity<User> {
         logger.info("# Login user with token [$request]")

@@ -10,6 +10,9 @@ interface IUserEntity: MongoRepository<UserEntity, String>/*, QuerydslPredicateE
     @Query("{ 'email' : ?0, confirmed: true}")
     fun findAllByEmail(email: String): Optional<List<UserEntity>>
 
+    @Query("{ 'user.id' : ?0}")
+    fun findAllByUserId(userId: String): Optional<List<UserEntity>>
+
     @Query("{ \$or: [ { 'name' : { \$regex: ?0, \$options: '-i'  } }, " +
                     "{'description' : { \$regex: ?0, \$options: '-i'  }}] }")
     fun findByNameOrDescription(name: String): List<UserEntity>

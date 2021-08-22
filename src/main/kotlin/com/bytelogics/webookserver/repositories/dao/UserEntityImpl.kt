@@ -10,16 +10,20 @@ import java.util.*
 @Service
 class UserEntityImpl (val db: IUserEntity){
 
-    fun findBookingEntities(): List<UserEntity> = db.findAll()
+    fun findUserEntities(): List<UserEntity> = db.findAll()
 
-    fun getBookingEntity(id: String): Optional<UserEntity> = db.findById(id)
+    fun getUserEntity(id: String): Optional<UserEntity> = db.findById(id)
 
     fun create(userEntity: UserEntity): UserEntity {
         return db.save(userEntity)
     }
-
+/*
     fun findAllByEmail(email: String): List<UserEntity> {
         return db.findAllByEmail(email).get()
+    }*/
+    fun findAllByUserId(userid: String): Optional<List<UserEntity>> {
+    val results =     db.findAllByUserId(userid)
+    return db.findAllByUserId(userid)
     }
 
     fun findByNameOrDescription(key: String): List<UserEntity> {
@@ -27,7 +31,7 @@ class UserEntityImpl (val db: IUserEntity){
     }
 
     fun createShiftTemplate(bookingEntityId: String, shiftTemplate: ShiftTemplate) {
-        var bookingEntity = getBookingEntity(id = bookingEntityId)
+        var bookingEntity = getUserEntity(id = bookingEntityId)
 
         if (bookingEntity.isEmpty) {
             throw EntityNotFoundException("Booking entity not found")
@@ -41,7 +45,7 @@ class UserEntityImpl (val db: IUserEntity){
     }
 
     fun updateShiftTemplate(bookingEntityId: String, templateId: String, shiftTemplate: ShiftTemplate) {
-        val bookingEntity = getBookingEntity(id = bookingEntityId)
+        val bookingEntity = getUserEntity(id = bookingEntityId)
 
         if (bookingEntity.isEmpty) {
             throw EntityNotFoundException("Booking entity not found")
@@ -60,7 +64,7 @@ class UserEntityImpl (val db: IUserEntity){
     }
 
     fun deleteShiftTemplate(bookingEntityId: String, shiftTemplateId: String) {
-        val bookingEntity = getBookingEntity(id = bookingEntityId)
+        val bookingEntity = getUserEntity(id = bookingEntityId)
 
         if (bookingEntity.isEmpty) {
             throw EntityNotFoundException("Booking entity not found")

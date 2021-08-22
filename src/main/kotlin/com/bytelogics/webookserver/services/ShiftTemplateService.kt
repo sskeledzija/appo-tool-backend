@@ -18,7 +18,7 @@ class ShiftTemplateService(val userEntity: UserEntityImpl,
                            val appointmentDayImpl: AppointmentDayImpl) {
 
     fun createBookingDays(bookingEntityId: String, templateId: String, fromDate: LocalDate, toDate: LocalDate): MutableList<ScheduleDay>? {
-        val bookingEntity = userEntity.getBookingEntity(bookingEntityId)
+        val bookingEntity = userEntity.getUserEntity(bookingEntityId)
 
         if (bookingEntity.isEmpty) {
             throw EntityNotFoundException("Booking entity with provided ID does not exist")

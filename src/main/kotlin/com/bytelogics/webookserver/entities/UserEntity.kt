@@ -11,7 +11,7 @@ import java.util.*
 
 @Document
 data class UserEntity (@Id val id: String = UUID.randomUUID().toString(),
-                       @DBRef val user: User?, // TODO temporary set to optional!!
+                       @DBRef val user: User,
                        val name: String,
                        val description: String,
                        @DBRef val activityArea: ActivityField?,

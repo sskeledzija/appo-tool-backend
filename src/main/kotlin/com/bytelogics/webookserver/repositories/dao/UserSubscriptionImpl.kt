@@ -19,7 +19,7 @@ class UserSubscriptionImpl (val db: IUserSubscription, val userEntityImpl: UserE
             throw EntityAlreadyExistsException("Already active subscription exists")
         }
 
-        val bookingEntity = userEntityImpl.getBookingEntity(bookingEntityId)
+        val bookingEntity = userEntityImpl.getUserEntity(bookingEntityId)
 
         val bookerSubscription = UserSubscription(UUID.randomUUID().toString(), bookerId, bookingEntity.get(),
             Date().toInstant(), subscriptionRequest.requestComment, null, null, null, null, SubscriptionState.PENDING,

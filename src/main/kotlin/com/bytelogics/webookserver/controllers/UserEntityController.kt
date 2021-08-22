@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
+import java.util.*
 
 @CrossOrigin
 @RestController("/user-entities")
@@ -38,7 +39,13 @@ class UserEntityController(val userEntityImpl: UserEntityImpl,
     @GetMapping("/{id}")
     fun getBookingEntity(@PathVariable id: String): ResponseEntity<UserEntity> {
         logger.info("# get booking entity by [$id]")
-        return ResponseEntity.of(userEntityImpl.getBookingEntity(id))
+        return ResponseEntity.of(userEntityImpl.getUserEntity(id))
+    }
+
+    @GetMapping("/user/{id}")
+    fun getUserEntities(@PathVariable id: String): ResponseEntity<List<UserEntity>> {
+        logger.info("# get user's entities. User id [$id]")
+        return ResponseEntity.of(userEntityImpl.findAllByUserId(id))
     }
 
     @CrossOrigin
