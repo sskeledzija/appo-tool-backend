@@ -3,7 +3,6 @@ package com.bytelogics.webookserver.entities
 import com.bytelogics.webookserver.entities.templates.Address
 import com.bytelogics.webookserver.entities.templates.Email
 import com.bytelogics.webookserver.entities.templates.Phone
-import com.bytelogics.webookserver.entities.templates.ShiftTemplate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
@@ -19,4 +18,5 @@ data class UserEntity (@Id val id: String = UUID.randomUUID().toString(),
                        val address: Address?,
                        val phone: Phone?,
                        val email: Email,
-                       var shiftTemplates: MutableList<ShiftTemplate>?)
+                      // var shiftTemplates: MutableList<ShiftTemplate>?
+)
