@@ -37,7 +37,7 @@ class UserController(val userService: UserImpl,
     @GetMapping("/{id}")
     fun getBooker(@PathVariable id: String): ResponseEntity<User> {
         logger.info("# Get user by ID [$id]")
-        val optUser: Optional<User> = userService.findBooker(id);
+        val optUser: Optional<User> = userService.findUser(id);
         return ResponseEntity.of(optUser)
     }
 

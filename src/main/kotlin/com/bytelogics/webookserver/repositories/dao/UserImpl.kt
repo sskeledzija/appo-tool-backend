@@ -23,15 +23,15 @@ class UserImpl (val db: IUser){
     }
 
     // should be never used
-    fun findBookers(): List<User> = db.findAll()
+    fun findUsers(): List<User> = db.findAll()
 
-    fun findBooker(id: String): Optional<User> = db.findById(id)
+    fun findUser(id: String): Optional<User> = db.findById(id)
 
     fun create(user: User): User {
 
-        val existingBooker = findOneByEmail(user.email.address)
+        val existingUser = findOneByEmail(user.email.address)
 
-        if (existingBooker.isPresent) {
+        if (existingUser.isPresent) {
             throw EntityAlreadyExistsException("Booker already exists")
         }
 

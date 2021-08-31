@@ -5,11 +5,8 @@ import com.bytelogics.webookserver.entities.ScheduleDay
 import com.bytelogics.webookserver.entities.UserEntity
 import com.bytelogics.webookserver.entities.OrganizationType
 import com.bytelogics.webookserver.entities.templates.AppointmentSlot
-import com.bytelogics.webookserver.entities.templates.ShiftTemplate
-import com.bytelogics.webookserver.repositories.dao.ActivityAreaImpl
-import com.bytelogics.webookserver.repositories.dao.AppointmentDayImpl
-import com.bytelogics.webookserver.repositories.dao.UserEntityImpl
-import com.bytelogics.webookserver.repositories.dao.OrganizationTypeImpl
+import com.bytelogics.webookserver.entities.ShiftTemplate
+import com.bytelogics.webookserver.repositories.dao.*
 import com.bytelogics.webookserver.services.ShiftTemplateService
 import org.slf4j.LoggerFactory
 import org.springframework.format.annotation.DateTimeFormat
@@ -17,7 +14,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
-import java.util.*
 
 @CrossOrigin
 @RestController("/user-entities")
@@ -26,7 +22,8 @@ class UserEntityController(val userEntityImpl: UserEntityImpl,
                            val activityAreaImpl: ActivityAreaImpl,
                            val organizationTypeImpl: OrganizationTypeImpl,
                            val shiftTemplateService: ShiftTemplateService,
-                           val appointmentDayImpl: AppointmentDayImpl) {
+                           val appointmentDayImpl: AppointmentDayImpl,
+                           val shiftTemplate: ShiftTemplateImpl) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -91,19 +88,25 @@ class UserEntityController(val userEntityImpl: UserEntityImpl,
     @PostMapping("/{entityId}/shift-templates")
     fun createShiftTemplate(@PathVariable entityId: String, @RequestBody template: ShiftTemplate) {
         logger.info("# Create Shift template for booking entity [$entityId], template data: [$template]")
-        userEntityImpl.createShiftTemplate(entityId, template)
+        shiftTemplate.create(entityId, template)
     }
 
     @PutMapping("/{entityId}/shift-templates/{templateId}")
     fun updateShiftTemplate(@PathVariable entityId: String, @PathVariable templateId: String, @RequestBody template: ShiftTemplate) {
         logger.info("# Update Shift template for booking entity [$entityId], template data: [$template]")
-        userEntityImpl.updateShiftTemplate(entityId,templateId, template)
+        shiftTemplate.update(entityId, template)
     }
 
     @DeleteMapping("/{entityId}/shift-templates/{templateId}")
     fun deleteShiftTemplate(@PathVariable entityId: String, @PathVariable templateId: String) {
         logger.info("# Delete Shift template [$templateId] from booking entity [$entityId]")
-        userEntityImpl.deleteShiftTemplate(entityId, templateId)
+        shiftTemplate.delete(entityId, templateId)
+    }
+
+    @GetMapping("/{entityId}/shift-templates")
+    fun getShiftTemplates(@PathVariable entityId: String) {
+        logger.info("# Get Shift templates for entity [$entityId] from booking entity [$entityId]")
+        shiftTemplate.getEntityShiftTemplates(entityId)
     }
 
     /**
