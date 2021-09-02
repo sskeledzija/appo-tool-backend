@@ -11,7 +11,7 @@ import java.util.*
 
 @Document
 class ShiftTemplate(@Id val id: String = UUID.randomUUID().toString(),
-                    @DBRef var entity: UserEntity,
+                    @DBRef var entity: UserEntity?,
                     var name: String,
                     var description: String?,
                     var validFrom: Instant?,    // validity start
