@@ -2,7 +2,7 @@ package com.bytelogics.webookserver.controllers
 
 import com.bytelogics.webookserver.entities.User
 import com.bytelogics.webookserver.entities.UserSubscription
-import com.bytelogics.webookserver.entities.templates.SubscriptionRequest
+import com.bytelogics.webookserver.entities.SubscriptionRequest
 import com.bytelogics.webookserver.repositories.dao.UserImpl
 import com.bytelogics.webookserver.repositories.dao.UserSubscriptionImpl
 import org.slf4j.LoggerFactory
@@ -74,7 +74,8 @@ class UserController(val userService: UserImpl,
 
     @PostMapping("/{id}/subscriptions/{bookingEntityId}")
     fun createBookerSubscriptionRequest(@PathVariable id: String, @PathVariable bookingEntityId: String,
-                                        @RequestBody subscription: SubscriptionRequest): ResponseEntity<UserSubscription> {
+                                        @RequestBody subscription: SubscriptionRequest
+    ): ResponseEntity<UserSubscription> {
         logger.info("# Create user subscription. user id: [$id], booking entity id [$bookingEntityId] subscription data: [$subscription]")
         val userSubscription: UserSubscription = userSubscription.createBookerSubscription(id, bookingEntityId, subscription);
         return ResponseEntity.status(HttpStatus.CREATED).body(userSubscription)

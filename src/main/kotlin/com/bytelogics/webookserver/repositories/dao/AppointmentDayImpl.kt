@@ -25,7 +25,11 @@ class AppointmentDayImpl (val db: IUserDay){
 
         // if some data already exists, update already booked values (if exist)
         scheduleDays.forEach{ newDay ->
-            existingBookingDays.filter { localDateMatch(it.date, newDay.date) }.forEach{ newDay.appointments.addAll(it.appointments) }
+            existingBookingDays.filter { localDateMatch(it.date, newDay.date) }.forEach{ it.appointments?.let { it1 ->
+                newDay.appointments?.addAll(
+                    it1
+                )
+            } }
         }
 
         println("############# Updated: ${scheduleDays.size}")
@@ -59,7 +63,7 @@ class AppointmentDayImpl (val db: IUserDay){
         // TODO if (!bookingFits(bookingSlot)) throw CannotInsertBookingException()
 
         appointmentSlot.confirmed = false
-        day.get().appointments.add(appointmentSlot)
+        day.get().appointments?.add(appointmentSlot)
 
         return db.save(day.get())
 

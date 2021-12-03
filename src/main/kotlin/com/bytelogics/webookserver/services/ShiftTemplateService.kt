@@ -18,7 +18,7 @@ import java.util.*
 class ShiftTemplateService(private val userEntity: UserEntityImpl,
                            private val appointmentDayImpl: AppointmentDayImpl,
                            private val shiftTemplateImpl: ShiftTemplateImpl) {
-
+/*
     fun createBookingDays(userEntityId: String, templateId: String, fromDate: LocalDate, toDate: LocalDate): MutableList<ScheduleDay>? {
         val maybeUserEntity = userEntity.getUserEntity(userEntityId)
 
@@ -57,7 +57,7 @@ class ShiftTemplateService(private val userEntity: UserEntityImpl,
     fun createDay(date: LocalDate, hours: List<OpenPeriod>?, template: ShiftTemplate, bookingEntityId: String): ScheduleDay {
 
         //hours ?: Unit
-        return ScheduleDay(UUID.randomUUID().toString(), bookingEntityId, date, template.maxNrOfSeats, "",
+        return ScheduleDay(bookingEntityId, date, template.maxNrOfSeats, "",
             getAvailabilities(date, hours?: emptyList()), mutableListOf()
         )
     }
@@ -65,12 +65,12 @@ class ShiftTemplateService(private val userEntity: UserEntityImpl,
     fun getAvailabilities(date: LocalDate, hours: List<OpenPeriod>): List<AppointmentAvailability> {
         return hours.map {
             AppointmentAvailability(
-                UUID.randomUUID(),
+
                 LocalTime.parse(it.from),
                 LocalTime.parse(it.to),
                 "",
-                UUID.randomUUID()
+                UUID.randomUUID().toString()
             )
         }.toCollection(arrayListOf())
-    }
+    } */
 }

@@ -1,5 +1,6 @@
 package com.bytelogics.webookserver.entities.templates
 
+import org.springframework.data.mongodb.core.query.where
 import java.time.Instant
 
 class WorkingHours(var validFrom: Instant,
@@ -10,4 +11,21 @@ class WorkingHours(var validFrom: Instant,
                    var thursday: List<OpenPeriod>?,
                    var friday: List<OpenPeriod>?,
                    var saturday: List<OpenPeriod>?,
-                   var sunday: List<OpenPeriod>?)
+                   var sunday: List<OpenPeriod>?) {
+
+    fun getPeriodsForDay(day: String): List<OpenPeriod>? {
+        return when (day) {
+            "monday" -> monday
+            "tuesday" -> tuesday
+            "wednesday" -> wednesday
+            "thursday" -> thursday
+            "friday" -> friday
+            "saturday" -> saturday
+            "sunday" -> sunday
+            else -> {
+                listOf()
+            }
+
+        }
+    }
+}

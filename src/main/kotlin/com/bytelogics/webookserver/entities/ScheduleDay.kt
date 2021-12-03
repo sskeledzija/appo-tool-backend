@@ -7,12 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
 import java.util.*
 
-@Document
+//@Document
 class ScheduleDay(@Id val id: String = UUID.randomUUID().toString(),
-                  var bookingEntityId: String,
+      //            var bookingEntityId: String,
                   val date: LocalDate, // day
                   var maxSeats: Int?,
-                  var dailyNotes: String,
-                  var availabilities: List<AppointmentAvailability>,
-                  var appointments: MutableList<AppointmentSlot>
+                  var dailyNotes: String?,
+                  var availabilities: List<AppointmentAvailability>?,
+                  var appointments: MutableList<AppointmentSlot>?
 )

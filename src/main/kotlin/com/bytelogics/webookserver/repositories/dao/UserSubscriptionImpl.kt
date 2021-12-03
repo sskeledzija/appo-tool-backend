@@ -1,7 +1,7 @@
 package com.bytelogics.webookserver.repositories.dao
 
 import com.bytelogics.webookserver.entities.UserSubscription
-import com.bytelogics.webookserver.entities.templates.SubscriptionRequest
+import com.bytelogics.webookserver.entities.SubscriptionRequest
 import com.bytelogics.webookserver.entities.templates.SubscriptionState
 import com.bytelogics.webookserver.exceptions.EntityAlreadyExistsException
 import com.bytelogics.webookserver.exceptions.EntityMismatchException
