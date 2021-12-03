@@ -104,38 +104,11 @@ class UserEntityController(val userEntityImpl: UserEntityImpl,
     }
 
     @GetMapping("/{entityId}/shift-templates")
-    fun getShiftTemplates(@PathVariable entityId: String) {
-        logger.info("# Get Shift templates for entity [$entityId] from booking entity [$entityId]")
-        shiftTemplate.getEntityShiftTemplates(entityId)
+    fun getShiftTemplates(@PathVariable entityId: String): List<ShiftTemplate> {
+        logger.info("# Get Shift templates from booking entity [$entityId]")
+        return shiftTemplate.getEntityShiftTemplates(entityId)
     }
 
-    /**
-     * WORKING DAYS
-     */
-    @PostMapping("/{entityId}/working-days")
-    fun createWorkingDays(@PathVariable entityId: String,
-                          @RequestParam("templateId") templateId: String,
-                          @RequestParam("from") @DateTimeFormat(pattern = "dd.MM.yyyy") fromDate: LocalDate,
-                          @RequestParam("to") @DateTimeFormat(pattern = "dd.MM.yyyy") toDate: LocalDate ): MutableList<ScheduleDay>? {
-        logger.info("# Create working days for booking entity [$entityId], template ID: [$templateId], date: [$fromDate - $toDate]")
-        return shiftTemplateService.createBookingDays(entityId, templateId, fromDate, toDate)
-    }
-
-    @GetMapping("/{entityId}/working-days")
-    fun getWorkingDays(@PathVariable entityId: String,
-                          @RequestParam("templateId") templateId: String,
-                          @RequestParam("from") @DateTimeFormat(pattern = "dd.MM.yyyy") fromDate: LocalDate,
-                          @RequestParam("to") @DateTimeFormat(pattern = "dd.MM.yyyy") toDate: LocalDate ): List<ScheduleDay>? {
-        logger.info("# Create working days for booking entity [$entityId], template ID: [$templateId], date: [$fromDate - $toDate]")
-        return appointmentDayImpl.getBookingDaysSorted(fromDate, toDate, entityId)
-    }
-
-    @PostMapping("/{entityId}/working-days/{dayId}")
-    fun bookWorkingSlot(@PathVariable entityId: String,
-                        @PathVariable dayId: String, @RequestBody appointmentSlot: AppointmentSlot): ScheduleDay? {
-        logger.info("# Create booking for booking entity [$entityId], day ID: [$dayId], booking data: [$appointmentSlot]")
-        return appointmentDayImpl.bookSlot(entityId, dayId, appointmentSlot)
-    }
 
 
 }

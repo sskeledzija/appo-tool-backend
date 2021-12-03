@@ -11,13 +11,13 @@ import java.util.*
 
 @Document
 class ShiftTemplate(@Id val id: String = UUID.randomUUID().toString(),
-                    @DBRef var entity: UserEntity,
+                    @DBRef var entity: UserEntity?,
                     var name: String,
                     var description: String?,
                     var validFrom: Instant?,    // validity start
                     var validTo: Instant?,      // validity end
                     var disabled: Boolean?,
-                    var workingHours: MutableList<WorkingHours>?,
+                    var workingHours: WorkingHours,
                     var dayOfWeekRules: DayOfWeekRules?,
                     var weekRules: WeekRules?,
                     var maxNrOfSeats: Int?, // at the same time. When booking slot, nr of free seats in that period must be taken in consideration

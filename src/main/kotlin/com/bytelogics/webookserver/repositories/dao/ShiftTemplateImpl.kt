@@ -49,7 +49,7 @@ class ShiftTemplateImpl (val db: IShiftTemplate,
 
     fun getEntityShiftTemplates(entityId: String): List<ShiftTemplate> {
 
-        return db.findEntityTemplates(getUserEntity(entityId).get())
+        return db.findEntityTemplates(entityId)
     }
 
     fun create(entityId: String, shiftTemplate: ShiftTemplate): ShiftTemplate {
